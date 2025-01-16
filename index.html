@@ -9,7 +9,28 @@
 <body>
   <div class="container">
     <h1>Gerador de Senhas</h1>
-    <p>Clique no botão para gerar uma senha aleatória:</p>
+
+    <div class="options">
+      <label>
+        <input type="checkbox" id="includeLetters" checked>
+        Incluir Letras
+      </label>
+      <label>
+        <input type="checkbox" id="includeNumbers" checked>
+        Incluir Números
+      </label>
+      <label>
+        <input type="checkbox" id="includeSymbols" checked>
+        Incluir Caracteres Especiais
+      </label>
+    </div>
+
+    <div class="length-input">
+      <label for="passwordLength">Quantidade de Caracteres:</label>
+      <input type="number" id="passwordLength" value="8" min="3" max="50">
+    </div>
+
+    <p>Clique no botãoabaixo para gerar uma senha aleatória:</p>
     <div class="output">
       <input type="text" id="passwordOutput" readonly>
       <button id="copyBtn">Copiar</button>
