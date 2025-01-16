@@ -7,6 +7,11 @@ function generatePassword() {
   const includeSymbols = document.getElementById("includeSymbols").checked;
   const passwordLength = parseInt(document.getElementById("passwordLength").value, 10);
 
+  if (passwordLength < 3 || passwordLength > 50) {
+    alert("Por favor, insira um valor entre 3 e 50 para a quantidade de caracteres:");
+    return;
+  }
+
   if (!includeLetters && !includeNumbers && !includeSymbols) {
     alert("Selecione pelo menos uma opção (letras, números ou caracteres especiais)!");
     return;
