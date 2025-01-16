@@ -16,18 +16,44 @@ function generatePassword() {
   const numbers = "0123456789";
   const symbols = "!@#$%^&*()_+{}[]|:;<>,.?/";
 
-  let characterPool = "";
-  if (includeLetters) characterPool += letters;
-  if (includeNumbers) characterPool += numbers;
-  if (includeSymbols) characterPool += symbols;
-
+  let guaranteedCharacters = "";
+  let remainingCharacters = "";
   let password = "";
-  for (let i = 0; i < passwordLength; i++) {
-    const randomIndex = Math.floor(Math.random() * characterPool.length);
-    password += characterPool[randomIndex];
+
+  if (includeLetters) {
+    const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+    guaranteedCharacters += randomLetter;
+    remainingCharacters += letters;
+  }
+  if (includeNumbers) {
+    const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+    guaranteedCharacters += randomNumber;
+    remainingCharacters += numbers;
+  }
+  if (includeSymbols) {
+    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+    guaranteedCharacters += randomSymbol;
+    remainingCharacters += symbols;
   }
 
+  for (let i = guaranteedCharacters.length; i < passwordLength; i++) {
+    const randomIndex = Math.floor(Math.random() * remainingCharacters.length);
+    password += remainingCharacters[randomIndex];
+  }
+
+  password += guaranteedCharacters;
+  password = shufflePassword(password);
+
   document.getElementById("passwordOutput").value = password;
+}
+
+function shufflePassword(password) {
+  const array = password.split("");
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array.join("");
 }
 
 function copyToClipboard() {
@@ -38,7 +64,7 @@ function copyToClipboard() {
   }
 
   passwordField.select();
-  passwordField.setSelectionRange(0, 99999); // Para dispositivos móveis
+  passwordField.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(passwordField.value)
     .then(() => alert("Senha copiada!"))
     .catch(() => alert("Falha ao copiar a senha."));
