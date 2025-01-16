@@ -23,6 +23,28 @@ h1 {
   color: #001F3F;
 }
 
+.options, .length-input {
+  margin: 10px 0;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #001f3f;
+}
+
+input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  font-size: 14px;
+  border: 2px solid #001F3F;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  color: #001F3F;
+}
+
 .output {
   display: flex;
   align-items: center;
